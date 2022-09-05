@@ -20,7 +20,7 @@ public class UserController {
     ActorRepository actorRepository;
 
 
-    @GetMapping("/actor")
+    @GetMapping("actor")
     public List<Actor> getActor(){
 
        return actorRepository.findAll();
@@ -80,21 +80,18 @@ public class UserController {
 
     @PostMapping("/actor/{id}")
     public ResponseVO<Actor> updateActor(@PathVariable Integer id, @RequestBody Actor actor){
-        try {
+
             Actor updateActor = actorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Record not found " + id));
             updateActor.setFirst_name(actor.getFirst_name());
             updateActor.setLast_name(actor.getLast_name());
             updateActor.setLast_update(actor.getLast_update());
             actorRepository.save(updateActor);
 
-        } catch (Exception e) {
-            e.getMessage();
-        }
 
         if (actor != null) {
             return new ResponseVO(200, "Success", actor);
         } else {
-            return new ResponseVO(500, "Error no data", new ArrayList<>());
+            return new ResponseVO(500, "Error no data", new ArrayList());
         }
 
     }
