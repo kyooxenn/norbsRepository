@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace ="sakilaproject.mapper.FilmMapper">
+
+    <resultMap id="rentalDetailResultMap" type ="sakilaproject.model.RentalDetails">
+        <result column = "rental_id" property="rental_id" />
+        <result column = "rental_date" property="rental_date" />
+        <result column = "return_date" property="return_date" />
+        <result column = "title" property="title" />
+        <result column = "customer_name" property="customer_name" />
+        <result column = "payment_date" property="payment_date" />
+        <result column = "staff_name" property="staff_name" />
+        <result column = "amount" property="amount" />
+
+    </resultMap>
+
+    <select id="getRentalDetail" parameterType="java.lang.Integer" resultMap="rentalDetailResultMap">
+        SELECT
+
+
+        INNER JOIN film ON film_actor.film_id = film.film_id
+        INNER JOIN actor ON film_actor.actor_id = film.film_id
+        WHERE film_actor.film_id = #{film_id}
+
+        <where>
+            <if test ="customer_id !=null and customer_id!= ''">
+                and customer.customer_id = #{customer_id}
+            </if>
+            <if test ="customer_id !=null and customer_id!= ''">
+                and customer.customer_id = #{customer_id}
+            </if>
+            <if test ="customer_id !=null and customer_id!= ''">
+                and customer.customer_id = #{customer_id}
+            </if>
+            <if test ="customer_id !=null and customer_id!= ''">
+                and customer.customer_id = #{customer_id}
+            </if>
+
+
+        </where>
+    </select>
+
+
+</mapper>

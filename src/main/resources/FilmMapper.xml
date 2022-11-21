@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+        <mapper namespace ="sakilaproject.mapper.FilmMapper">
+
+        <resultMap id="filmActorResultMap" type ="sakilaproject.entity.FilmActor">
+        <result column = "film_id" property="filmId" />
+        <result column = "actor_id" property="actorId" />
+        <result column = "title" property="title" />
+        <result column = "first_name" property="firstName" />
+        <result column = "last_name" property="lastName" />
+        </resultMap>
+
+        <select id="findById" parameterType="java.lang.Integer" resultMap="filmActorResultMap">
+                SELECT
+                film_id,
+                actor_id,
+                title,
+                first_name,
+                last_name
+                FROM film_actor
+                INNER JOIN film ON film_actor.film_id = film.film_id
+                INNER JOIN actor ON film_actor.actor_id = film.film_id
+                WHERE film_actor.film_id = #{film_id}
+        </select>
+
+
+</mapper>
