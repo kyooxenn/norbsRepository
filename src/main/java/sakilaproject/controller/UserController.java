@@ -8,6 +8,7 @@ import sakilaproject.repository.ActorRepository;
 import sakilaproject.vo.ResponseVO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,15 +23,12 @@ public class UserController {
 
     @GetMapping("actor")
     public List<Actor> getActor(){
-
        return actorRepository.findAll();
     }
 
     @PostMapping("/findActor")
     public Optional<Actor> getActorById(@RequestBody Actor id){
-
           return actorRepository.findById(id.getActor_id());
-
     }
 
 
@@ -44,7 +42,6 @@ public class UserController {
     public String hello2(@RequestParam String name){
         return "Hello my name is " + name;
     }
-
 
 
     @GetMapping("/list")
@@ -86,24 +83,12 @@ public class UserController {
             updateActor.setLast_name(actor.getLast_name());
             updateActor.setLast_update(actor.getLast_update());
             actorRepository.save(updateActor);
-
-
         if (actor != null) {
             return new ResponseVO(200, "Success", actor);
         } else {
-            return new ResponseVO(500, "Error no data", new ArrayList());
+            return new ResponseVO(500, "Error no data", Collections.emptyList());
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 }
