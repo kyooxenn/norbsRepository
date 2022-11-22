@@ -14,17 +14,23 @@
         <result column = "payment_date" property="payment_date" />
         <result column = "staff_name" property="staff_name" />
         <result column = "amount" property="amount" />
-
     </resultMap>
 
     <select id="getRentalDetail" parameterType="java.lang.Integer" resultMap="rentalDetailResultMap">
-        SELECT
-
-
-        INNER JOIN film ON film_actor.film_id = film.film_id
-        INNER JOIN actor ON film_actor.actor_id = film.film_id
-        WHERE film_actor.film_id = #{film_id}
-
+        SELECT rental.rental_id as rental_id
+        rental.rental_date as rental_date,
+        rental.return_date as return_date,
+        film.title as title,
+        CONCAT(customer.first_name, " ", customer.last_name) as customer_name,
+        payment.payment_date as payment_date,
+        CONCAT(staff.first_name, " ", staff.last_name) as staff_name,
+        payment.amount as amount
+        FROM rental
+        INNER JOIN payment ON rental.rental_id = payment.payment_id
+        INNER JOIN inventory ON rental.inventory_id = inventory.inventory_id
+        INNER JOIN customer ON rental.customer_id = customer.customer_id
+        INNER JOIN staff ON rental.staff_id = staff.staff_id
+        INNER JOIN film ON inventory.film_id = film.film_id
         <where>
             <if test ="customer_id !=null and customer_id!= ''">
                 and customer.customer_id = #{customer_id}
@@ -38,10 +44,7 @@
             <if test ="customer_id !=null and customer_id!= ''">
                 and customer.customer_id = #{customer_id}
             </if>
-
-
         </where>
     </select>
-
 
 </mapper>
