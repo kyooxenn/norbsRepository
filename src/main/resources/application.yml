@@ -1,0 +1,24 @@
+spring:
+  security:
+    ignored: /**
+    profiles:
+      active:
+       mybatis:
+          mapperLocations: /mapper/*Mapper.xml
+          management:
+            endpoint:
+              health:
+                show-details: always
+                info:
+                  env:
+                    enabled: true
+                    app:
+                      id: kkcloud-trainee-system
+
+apollo:
+    autoUpdateInjectedSpringProperties: true
+    bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: application
