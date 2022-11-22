@@ -1,0 +1,18 @@
+app:
+  id: kkcloud-trainee-system
+  apollo:
+    meta : http://172.31.24.99:18080
+    autoUpdateInjectedSpringProperties: true
+    bootstrap:
+      enabled: true
+      eagerLoad:
+        enabled: true
+        namespaces: application
+        configService:
+          config:
+            configServiceUrlOverride: http://172.31.24.99:18080
+            http:
+              encoding:
+                charset: UTF-8
+                force: true
+                enabled: true
