@@ -1,5 +1,7 @@
 package sakilaproject.vo;
 
+import java.util.Collections;
+
 public class ResponseVO<T> {
     private int code;
     private String msg;
@@ -10,6 +12,20 @@ public class ResponseVO<T> {
         this.msg = msg;
         this.data = data;
     }
+
+    public ResponseVO(ServiceStatusCode serviceStatusCode) {
+        this.code =serviceStatusCode.getCode();
+        this.msg = serviceStatusCode.getMsg();
+        this.data = (T) Collections.emptyList();
+    }
+
+    public ResponseVO(ServiceStatusCode serviceStatusCode, T data) {
+        this.code =serviceStatusCode.getCode();
+        this.msg = serviceStatusCode.getMsg();
+        this.data =data;
+    }
+
+
 
     public int getCode() {
         return code;
