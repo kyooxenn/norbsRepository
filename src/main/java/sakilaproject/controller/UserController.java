@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import sakilaproject.dto.Actor;
 import sakilaproject.exception.ResourceNotFoundException;
 import sakilaproject.repository.ActorRepository;
+import sakilaproject.vo.ResponseHelper;
 import sakilaproject.vo.ResponseVO;
 
 import java.util.ArrayList;
@@ -89,6 +90,18 @@ public class UserController {
             return new ResponseVO(500, "Error no data", Collections.emptyList());
         }
 
+    }
+
+    @PostMapping("/actor/allList")
+    public ResponseVO<List<Actor>> getList() {
+        try{
+            List<Actor> customModelList = actorRepository.findAll();
+
+         //   return new ResponseVO<List<Actor>> (200,"Success!", customModelList);
+            return ResponseHelper.success(customModelList);
+        }catch (Exception e){
+            return new ResponseVO<List<Actor>>  (500,"Failed", Collections.emptyList());
+        }
     }
 
 }
